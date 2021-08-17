@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Chapter 8 Errata</title> 
+</head>
+<body>
+
+<table>
+<tr> <td align=center> <a href="../../https@www.createspace.com/3651611">
+<img src="book_front.jpeg" width=50%> </a> </td> <td align=left width=50%>
+<center>
+<H1> Errata </H1>
+<H1> Introduction to 64 Bit Intel Assembly Language Programming </H1>
+<H2> Ray Seyfarth </H2>
+</center>
+</td></tr>
+</table>
+</center>
+
+<H2> Errata for Chapter 8 </H2>
+
+<UL>
+    <LI> In the table on page 74, ja is not an alias for jg. </LI>
+    <LI> The "mov [result]" statements on page 76 need to have "qword" added -
+         like "mov  qword [result], 1"</LI>
+    <LI> The end_while on page 81 is indented for no reason. </LI>
+    <LI> On page 83 the label "found:" is missing from the fifth line of the
+    code segment </LI>
+    <LI> On page 86 there is minor error in memcmp.  The movsx instruction
+         should be movzx. </LI>
+    <LI> One page 86 there is a fairly serious error in memcmp.  The sub
+    instruction does not sign extend the rax register as I thought.  This
+    needs to be converted to "sub  rax, rcx" </LI>
+</UL>
+
+</body>
+</html> 

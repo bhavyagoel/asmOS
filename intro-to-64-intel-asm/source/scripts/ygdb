@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec gdb -x .$1.gdb $1

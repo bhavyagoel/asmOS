@@ -48,3 +48,4 @@ nasm -f elf64 test.asm && ld test.0 && ./a.out
 
 #### Side Refernces
 * https://dev.to/itzsudhan/better-github-commit-message-h0l
+* https://download.savannah.gnu.org/releases/pgubook/

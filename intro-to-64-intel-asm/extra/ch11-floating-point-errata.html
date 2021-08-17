@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Chapter 11 Errata</title> 
+</head>
+<body>
+
+<table>
+<tr> <td align=center> <a href="../../https@www.createspace.com/3651611">
+<img src="book_front.jpeg" width=50%> </a> </td> <td align=left width=50%>
+<center>
+<H1> Errata </H1>
+<H1> Introduction to 64 Bit Intel Assembly Language Programming </H1>
+<H2> Ray Seyfarth </H2>
+</center>
+</td></tr>
+</table>
+</center>
+
+<H2> Errata for Chapter 11 </H2>
+
+<p>
+The section about comparisons needs a bit of work.
+The floating point comparison instructions set different flags than the
+integer comparisons.
+Here is the proper set of floating point conditional jump instructions:
+</p>
+<table border=1 cellpadding=3>
+<tr> <td> instruction </td> <td> meaning </td> </tr>
+<tr> <td> jb  </td> <td> jump if below </td> </tr>
+<tr> <td> jbe </td> <td> jump if below or equal</td> </tr>
+<tr> <td> ja  </td> <td> jump if above </td> </tr>
+<tr> <td> jae </td> <td> jump if above or equal</td> </tr>
+<tr> <td> je  </td> <td> jump if equal </td> </tr>
+<tr> <td> jne </td> <td> jump if not equal </td> </tr>
+</table>
+
+<UL>
+    <LI> On page 116 "from" on the first line should be "for".
+    <LI> The comments in the code at the top of page 118, need to use subtract
+        instead of add.</LI>
+    <LI> On page 119, on the first line of 11.5.2, remove "double word". </LI>
+    <LI> On page 119, second paragraph under 11.5.2, "if implicit" should be
+         "is implicit".</LI>
+    <LI> On page 120, I tried to invent the instruction jmple.  It should be
+         jbe.</LI>
+    <LI> On page 122, replace sqrt in the code with sqrtss. </LI>
+    <LI> On page 123, left out the function name for "dot_product".</LI>
+    <LI> On page 123, replace "test" with "cmp" in the horner function. </LI>
+</UL>
+
+</body>
+</html> 

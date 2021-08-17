@@ -1,0 +1,88 @@
+#!/bin/bash
+
+args="$@"
+
+yld=$(basename $0)
+if [[ $yld = yld ]]
+then
+    start=_start
+    ld=ld
+else
+    start=main
+    ld=gcc
+fi
+
+exe=a.out
+savenext=0
+for arg in $args
+do
+    if [[ $arg = -o ]]
+    then
+        savenext=1
+    elif [[ $savenext = 1 ]]
+    then
+        exe=$arg
+        savenext=0
+    fi
+done
+
+gdbinit=.$exe.gdb
+echo break $start > $gdbinit
+
+for arg in $args
+do
+    if [[ ${arg: -2:2} = .o ]]
+    then
+        base=$(basename $arg .o)
+        if [[ -r $base.asm ]]
+        then
+            awk '
+                function process ( text,   params, name, pseudo, datatype )
+                {
+                    gsub ( /;.*/,"",text);
+                    n = split ( text, params );
+                    if ( n < 3 ) return;
+                    name = params[1];
+                    gsub ( /:/, "", name );
+                    if ( substr(name,0,1) == "." ) return;
+                    pseudo = tolower(params[2]);
+                    datatype = type[pseudo];
+                    if ( datatype == "" ) return;
+                    if ( datatype == "times" ) {
+                        pseudo = tolower(params[4]);
+                        datatype = type[pseudo];
+                        if ( datatype == "" ) return;
+                    }
+                    if ( datatype == "int" && index(text,".") > 0 ) {
+                        datatype = "float";
+                    }
+                    if ( datatype == "long" && index(text,".") > 0 ) {
+                        datatype = "double";
+                    }
+                    print "macro define", name, "((" datatype " *)&" name ")";
+                }
+                BEGIN {
+                    type["db"] = "unsigned char";
+                    type["dw"] = "short";
+                    type["dd"] = "int";
+                    type["dq"] = "long";
+                    type["resb"] = "unsigned char";
+                    type["resw"] = "short";
+                    type["resd"] = "int";
+                    type["resq"] = "long";
+                    type["times"] = "times";
+                }
+                {
+                    if ( NF == 1 && $1 ~ /[a-zA-Z0-9]*:/ ) {
+                        name = $1;
+                        getline;
+                        process( name " " $0 );
+                    } else {
+                        process( $0 );
+                    }
+                }' $base.asm >> $gdbinit
+        fi
+    fi
+done
+
+$ld $args

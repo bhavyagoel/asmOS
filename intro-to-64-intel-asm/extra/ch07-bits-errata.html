@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Chapter 7 Errata</title> 
+</head>
+<body>
+
+<table>
+<tr> <td align=center> <a href="../../https@www.createspace.com/3651611">
+<img src="book_front.jpeg" width=50%> </a> </td> <td align=left width=50%>
+<center>
+<H1> Errata </H1>
+<H1> Introduction to 64 Bit Intel Assembly Language Programming </H1>
+<H2> Ray Seyfarth </H2>
+</center>
+</td></tr>
+</table>
+</center>
+
+<H2> Errata for Chapter 7 </H2>
+
+<UL>
+    <LI> On page 63 the last line of the first paragraph in section
+         7.3 needs to have "and" replaced with "or" twice. </LI>
+    <LI> The exclusive or table on page 64 uses ampersand. </LI>
+    <LI> The line with neg near the bottom of page 66 should have not instead. </LI>
+    <LI> The same line should have rbx instead or rcz in the comment. </LI>
+    <LI> On page 69 the movsx does not allow an immediate 32 bit field as expected.
+         Instead of movsz and and, use shr and shl
+    <pre>
+        mov     rax, [sample]      ; move quad-word into rax
+        ror     rax, 23            ; shift to align bit 23 at 0
+        shr     rax, 29            ; wipe out 29 bits               NEW INSTRUCTION
+        shl     rax, 29            ; move bits back into alignment  NEW INSTRUCTION
+        or      rax, [field]       ; or in the new bits
+        rol     rax, 23            ; realign the bit fields
+        mov     [sample], rax      ; save the field
+
+    </pre>
+    
+    </LI>
+</UL>
+
+</body>
+</html> 

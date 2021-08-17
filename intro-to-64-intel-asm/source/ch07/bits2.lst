@@ -1,0 +1,25 @@
+     1                                 %line 1+1 bits2.asm
+     2                                 [segment .bss]
+     3 00000000 <gap>                  data resq 1024
+     4                                 [segment .text]
+     5                                 [global main]
+     6                                 main:
+     7 00000000 55                      push rbp
+     8 00000001 4889E5                  mov rbp, rsp
+     9 00000004 48C70425[00000000]-     mov qword [data], 0x10
+    10 00000004 10000000           
+    11 00000010 48C70425[08000000]-     mov qword [data+8], 0x1000
+    12 00000010 00100000           
+    13 0000001C 48C7C04D000000          mov rax, 77
+    14 00000023 4889C3                  mov rbx, rax
+    15 00000026 48C1EB06                shr rbx, 6
+    16 0000002A 4889C1                  mov rcx, rax
+    17 0000002D 4883E13F                and rcx, 0x3f
+    18 00000031 31D2                    xor edx, edx
+    19 00000033 480FA30CDD[00000000]      bt [data+8*rbx], rcx
+    20 0000003C 0F92D2                  setc dl
+    21 0000003F 480FAB0CDD[00000000]      bts [data+8*rbx], rcx
+    22 00000048 480FB30CDD[00000000]      btr [data+8*rbx], rcx
+    23 00000051 4831C0                  xor rax, rax
+    24 00000054 C9                      leave
+    25 00000055 C3                      ret
